@@ -1,0 +1,6 @@
+__pycache__/
+*.pkl
+.pytest_cache/
+.venv/
+data/corrupted_demo.csv
+models/baseline/

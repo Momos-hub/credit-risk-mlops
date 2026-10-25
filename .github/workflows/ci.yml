@@ -1,0 +1,33 @@
+name: credit-risk-ci
+
+on:
+  push:                 # any branch (main or master)
+  pull_request:
+  workflow_dispatch:    # adds a manual "Run workflow" button on GitHub
+
+jobs:
+  build-test-gate:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+          cache: pip
+      - run: pip install -r requirements.txt
+      - name: Lint
+        run: flake8 src tests --max-line-length=100
+      - name: Unit tests
+        run: pytest -v
+      - name: Data quality gate
+        run: python -m src.data_validation
+      - name: Train model
+        run: python -m src.train
+      - name: Model quality gate
+        run: python -m src.quality_gate
+      - name: Upload model artifact
+        if: success()
+        uses: actions/upload-artifact@v4
+        with:
+          name: credit-model
+          path: models/

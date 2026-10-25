@@ -1,0 +1,9 @@
+{
+  "auc": 0.9587,
+  "recall": 0.9524,
+  "precision": 0.5556,
+  "ks": 0.7951,
+  "cv_auc": 0.9524,
+  "rows": 1100,
+  "data_file": "credit_card_customers_v2.csv"
+}

@@ -1,0 +1,13 @@
+{
+  "Age": 0.0323,
+  "Income_Bracket": 0.0535,
+  "Credit_Limit": -0.471,
+  "Current_Balance": -0.2563,
+  "Monthly_Spend": 0.9012,
+  "Num_Transactions_Monthly": 0.2178,
+  "Payment_Delay_Days": 1.1029,
+  "Tenure_Months": -0.113,
+  "utilization": 3.3182,
+  "spend_to_limit": -0.2014,
+  "spend_per_txn": -0.2445
+}

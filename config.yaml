@@ -1,0 +1,24 @@
+data:
+  path: data/credit_card_customers_v2.csv   # current data (v1 was used for the baseline)
+  target: High_Risk_Customer
+  id_column: Customer_ID
+
+# Checked BEFORE training (data quality gate)
+validation:
+  min_rows: 500
+  max_null_fraction: 0.10          # per column
+  target_rate_range: [0.05, 0.40]  # share of high-risk customers
+  income_levels: [Low, Medium, High]
+
+model:
+  test_size: 0.2
+  random_state: 42
+  threshold: 0.5                   # probability above which a customer is flagged
+
+# Checked AFTER training (model quality gate) - the build FAILS if any is violated
+gate:
+  min_auc: 0.90
+  min_recall: 0.75                 # catching risky customers matters most
+  min_precision: 0.35              # stops the model from flagging everybody
+  min_ks: 0.60
+  max_auc_drop_vs_baseline: 0.03   # new model must not be clearly worse than v1 model
